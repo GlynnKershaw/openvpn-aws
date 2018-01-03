@@ -1,5 +1,3 @@
-# openvpn-aws
-
 ## Launch script
 #!/bin/bash
 
