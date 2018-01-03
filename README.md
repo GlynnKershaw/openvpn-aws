@@ -1,4 +1,6 @@
 ## Launch script
+
+```
 #!/bin/bash
 
 #Ubuntu
@@ -9,4 +11,5 @@ echo "tail -f /var/log/cloud-init-output.log" > /root/tail.sh
 chmod +x /root/tail.sh
 
 curl -O https://raw.githubusercontent.com/GlynnKershaw/openvpn-aws/master/install.sh
-bash install.sh
+bash install.sh```
+
