@@ -1,12 +1,4 @@
 #!/bin/bash
-# OpenVPN road warrior installer for Debian, Ubuntu and CentOS
-
-# This script will work on Debian, Ubuntu, CentOS and probably other distros
-# of the same families, although no support is offered for them. It isn't
-# bulletproof but it will probably work if you simply want to setup a VPN on
-# your Debian/Ubuntu/CentOS box. It has been designed to be as unobtrusive and
-# universal as possible.
-
 
 if [[ -e /etc/debian_version ]]; then
 	OS=debian
@@ -37,17 +29,11 @@ newclient () {
 	echo "</tls-auth>" >> ~/$1.ovpn
 }
 
-# Try to get our IP from the system and fallback to the Internet.
-# I do this to make the script compatible with NATed servers (lowendspirit.com)
-# and to avoid getting an IPv6.
 IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
 
-
-# ADDED:
 CLIENT="client"
 cd /etc/openvpn/easy-rsa/
 ./easyrsa build-client-full $CLIENT nopass
-# Generates the custom client.ovpn
 PROTOCOL=udp
 PORT=1194
 if [[ "$OS" = 'debian' ]]; then
@@ -204,10 +190,6 @@ comp-lzo
 setenv opt block-outside-dns
 key-direction 1
 verb 3" > /etc/openvpn/client-common.txt
-# Generates the custom client.ovpn
+
 newclient "$CLIENT"
-echo ""
-echo "Finished!"
-echo ""
-echo "Your client configuration is available at" ~/"$CLIENT.ovpn"
-echo "If you want to add more clients, you simply need to run this script again!"
+echo "Client file:" ~/"$CLIENT.ovpn"
