@@ -1,5 +1,7 @@
 ## Launch script
 
+Tested on Ubuntu. Uncomment lines before running.
+
 ```
 #!/bin/bash
 
