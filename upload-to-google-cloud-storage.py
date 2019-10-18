@@ -19,7 +19,7 @@ def upload_blob(bucket_name, source_file_name, destination_blob_name):
 
 def check_file_exists():
     if path.exists("/root/client.ovpn"):
-        upload_blob("/root/client.ovpn","<GCloud-Bucket>","client.ovpn")
+        upload_blob("<GCloud-Bucket>","/root/client.ovpn","client.ovpn")
     else:
         time.sleep(5)
         check_file_exists()
