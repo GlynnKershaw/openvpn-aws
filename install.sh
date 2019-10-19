@@ -4,10 +4,6 @@ if [[ -e /etc/debian_version ]]; then
 	OS=debian
 	GROUPNAME=nogroup
 	RCLOCAL='/etc/rc.local'
-elif [[ -e /etc/centos-release || -e /etc/redhat-release ]]; then
-	OS=centos
-	GROUPNAME=nobody
-	RCLOCAL='/etc/rc.d/rc.local'
 else
 	exit 5
 fi
@@ -30,8 +26,9 @@ newclient () {
 }
 
 IP=$(ip addr | grep 'inet' | grep -v inet6 | grep -vE '127\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | grep -o -E '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | head -1)
-
+# Client name
 CLIENT="client"
+
 cd /etc/openvpn/easy-rsa/
 ./easyrsa build-client-full $CLIENT nopass
 PROTOCOL=udp
