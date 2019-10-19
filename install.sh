@@ -37,8 +37,8 @@ cd /etc/openvpn/easy-rsa/
 PROTOCOL=udp
 PORT=1194
 if [[ "$OS" = 'debian' ]]; then
-	apt-get update
-	apt-get install openvpn iptables openssl ca-certificates -y
+	apt-get -y update
+	apt-get install -y openvpn iptables openssl ca-certificates
 	else
 	# Else, the distro is CentOS
 	yum install epel-release -y
